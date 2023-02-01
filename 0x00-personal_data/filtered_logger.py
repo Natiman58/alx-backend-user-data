@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 """
+    A filter module to hide some user data
 """
 
 
