@@ -38,6 +38,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields):
+        """Initialize the formater class using the given fields"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
