@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
     A filter module to hide some user data
     if RE <.*> is matched against '<a> b <c>',
@@ -49,6 +48,6 @@ class RedactingFormatter(logging.Formatter):
             using filter_datum functon
             fields = ["password", "date_of_birth"]
         """
-        message = super(RedactingFormatter, self).format(record)
+        message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
