@@ -49,6 +49,6 @@ class RedactingFormatter(logging.Formatter):
             using filter_datum functon
             fields = ["password", "date_of_birth"]
         """
-        message = super().format(record)
+        message = super(RedactingFormatter, self).format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
