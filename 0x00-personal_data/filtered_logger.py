@@ -10,7 +10,7 @@ from typing import List
 
 
 def filter_datum(fields: List[str], redaction: List[str],
-                 message: List[str], separator) -> str:
+                 message: List[str], separator: str) -> str:
     """
        returns an obfuscated message
        :param fields: list of fields to be obfuscated
