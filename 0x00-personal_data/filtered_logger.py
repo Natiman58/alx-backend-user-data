@@ -8,8 +8,7 @@ import re
 from typing import List
 
 
-def filter_datum(fields: List[str],
-                 redaction: List[str],
+def filter_datum(fields: List[str], redaction: List[str],
                  message: List[str], separator) -> str:
     """
        returns an obfuscated message
