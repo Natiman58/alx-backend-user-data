@@ -7,11 +7,11 @@
     in non-greedy or minimal fashion; as few characters as
     possible will be matched. Using the RE <.*?> will match only '<a>'.
 """
-
-
 import re
 from typing import List
 import logging
+
+PII_FIELDS = ['name', 'email', 'phone', 'ssn', 'password']
 
 
 def filter_datum(fields: List[str], redaction: str,
@@ -47,3 +47,17 @@ class RedactingFormatter(logging.Formatter):
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
+
+
+def get_logger(self) -> logging.Logger:
+    """returns a logging.logger obj"""
+    logger = logging.getLogger("user_data")  # set the logger
+    logger.setLevel(logging.INFO)  # set the logger level
+    logger.propagate = False  # no need to propagate to other loggers
+
+    handler = logging.StreamHandler()  # set the handler
+    formatter = RedactingFormatter(PII_FIELDS)  # set the formatter
+    handler.setFormatter(formatter)  # add the formatter to the handler
+    logger.addHandler(handler)  # add the handler to the logger object
+
+    return logger
