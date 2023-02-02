@@ -52,7 +52,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        """ return filtered values from incoming log records """
+        """ return filtered(obfuscated) values from incoming log records """
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
@@ -81,6 +81,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=DB_NAME
     )
 
+
 def main() -> None:
     """
         retrieve all rows in the database
@@ -91,10 +92,13 @@ def main() -> None:
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users")
-    rows = cursor.fetchall()
+    rows = cursor.column_names
+    for row in cursor:
+        message = "".join("{}={}; ".format(k, v) for k, v in zip(rows, row))
+        logger.info(message.strip())
+    cursor.close()
+    db.close()
 
-    for row in rows:
-        logger.info(row)
 
 if __name__ == "__main__":
     main()
