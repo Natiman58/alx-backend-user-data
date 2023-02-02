@@ -80,3 +80,21 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         host=HOST,
         database=DB_NAME
     )
+
+def main() -> None:
+    """
+        retrieve all rows in the database
+        and obfuscate the coulmns
+        (name, email, phone, ssn, password)
+    """
+    logger = get_logger()
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+
+    for row in rows:
+        logger.info(row)
+
+if __name__ == "__main__":
+    main()
