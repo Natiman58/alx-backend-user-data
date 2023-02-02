@@ -92,9 +92,9 @@ def main() -> None:
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users")
-    rows = cursor.column_names
+    column = cursor.column_names
     for row in cursor:
-        message = "".join("{}={}; ".format(k, v) for k, v in zip(rows, row))
+        message = "".join("{}={}; ".format(k, v) for k, v in zip(column, row))
         logger.info(message.strip())
     cursor.close()
     db.close()
