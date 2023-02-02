@@ -4,6 +4,7 @@ This script is used to hash passwords.
 """
 import bcrypt
 
+
 def hash_password(password: str) -> bytes:
     """
     Hashes a password
