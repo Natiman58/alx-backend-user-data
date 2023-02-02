@@ -10,7 +10,16 @@
 import re
 from typing import List
 import logging
+import mysql.connector
+import os
 
+# Get environment variables
+USER = os.getenv('PERSONAL_DATA_DB_USERNAME') or "root"
+PASSWORD = os.getenv('PERSONAL_DATA_DB_PASSWORD') or ""
+HOST = os.getenv('PERSONAL_DATA_DB_HOST') or "localhost"
+DB_NAME = os.getenv('PERSONAL_DATA_DB_NAME')
+
+# Tuple constant for the PII files
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
@@ -49,7 +58,7 @@ class RedactingFormatter(logging.Formatter):
                             message, self.SEPARATOR)
 
 
-def get_logger(self) -> logging.Logger:
+def get_logger() -> logging.Logger:
     """returns a logging.logger obj"""
     logger = logging.getLogger("user_data")  # set the logger
     logger.setLevel(logging.INFO)  # set the logger level
@@ -61,3 +70,12 @@ def get_logger(self) -> logging.Logger:
     logger.addHandler(handler)  # add the handler to the logger object
 
     return logger
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """returns connector to the database"""
+    return mysql.connector.connect(
+        user=USER,
+        password=PASSWORD,
+        host=HOST,
+        database=DB_NAME
+    )
