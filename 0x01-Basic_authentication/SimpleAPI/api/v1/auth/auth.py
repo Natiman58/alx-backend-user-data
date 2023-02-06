@@ -55,3 +55,9 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """ """
         return None
+
+
+class BasicAuth(Auth):
+    """
+        Template for basic authentication
+    """
