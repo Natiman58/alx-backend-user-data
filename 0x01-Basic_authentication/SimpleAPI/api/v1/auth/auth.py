@@ -3,6 +3,7 @@
     a class to manage the API authentication.
 """
 
+import re
 from typing import List, TypeVar
 from flask import request
 
@@ -36,8 +37,20 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """ """
-        return None
+        """
+        validate all requests to secure the API
+        returns authorization header from the request
+        """
+        if request is None:
+            return None
+
+        # header key: Authorization
+        header_key = request.headers.get('Authorization')
+        # if the request doesn't contain header key; -> None
+        if header_key is None:
+            return None
+
+        return header_key
 
     def current_user(self, request=None) -> TypeVar('User'):
         """ """
