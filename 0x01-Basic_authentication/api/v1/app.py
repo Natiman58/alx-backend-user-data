@@ -25,11 +25,13 @@ elif AUTH_TYPE == "basic_auth":
 
 excluded = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
+
 
 @app.errorhandler(401)
 def unauthorized(error):
@@ -39,6 +41,7 @@ def unauthorized(error):
     """
     return jsonify({"error": "Unauthorized"}), 401
 
+
 @app.errorhandler(403)
 def forbidden(error):
     """
@@ -46,6 +49,7 @@ def forbidden(error):
         403 error handler
     """
     return jsonify({"error": "Forbidden"}), 403
+
 
 @app.before_request
 def before_request():
@@ -63,6 +67,7 @@ def before_request():
             # If current user returns None -> 403(Forbidden)
             if auth.current_user(request) is None:
                 abort(403, description="Forbidden")
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
