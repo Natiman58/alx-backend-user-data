@@ -70,7 +70,7 @@ class BasicAuth(Auth):
          self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """
             returns a User object
-            based on email and password
+            based on the extracted email and password
         """
         if user_email is None or not isinstance(user_email, str):
             return None
@@ -86,3 +86,30 @@ class BasicAuth(Auth):
             return None
         except Exception:
             pass
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """
+            returns the current user based on request
+        """
+        # Authorize the header
+        header_auth = self.authorization_header(request)
+        # if header is authenticated and not none
+        if header_auth is not None:
+            # extract the base64 part of the header
+            h_base64 = self.extract_base64_authorization_header(header_auth)
+            # if the extracted base64 is not None
+            if h_base64 is not None:
+                # decode the base64 part of the header
+                h_decoded = self.decode_base64_authorization_header(h_base64)
+                # if the decoded base64 is not None
+                if h_decoded is not None:
+                    # extract the user email and pwd
+                    email, pwd = self.extract_user_credentials(h_decoded)
+                    # if email and pwd aren't none
+                    if email is not None and pwd is not None:
+                        # get the current user obj using the email and pwd
+                        user = self.user_object_from_credentials(email, pwd)
+                        # return the current user
+                        return user
+        else:
+            return None
