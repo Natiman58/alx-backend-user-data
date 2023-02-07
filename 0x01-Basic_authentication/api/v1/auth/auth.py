@@ -53,5 +53,5 @@ class Auth:
         return header_key
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ """
+        """ The current user"""
         return None
