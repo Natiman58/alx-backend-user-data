@@ -2,11 +2,7 @@
 """
     Definition of basic authentication
 """
-from asyncio.format_helpers import extract_stack
 import base64
-from lib2to3.pytree import convert
-from re import A
-from tkinter import E
 from api.v1.auth.auth import Auth
 
 
