@@ -26,7 +26,12 @@ elif AUTH_TYPE == "session_auth":
     auth = SessionAuth()
 
 
-excluded = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+excluded = [
+            '/api/v1/status/',
+            '/api/v1/unauthorized/',
+            '/api/v1/forbidden/',
+            '/api/v1/auth_session/login/',
+            ]
 
 
 @app.errorhandler(404)
@@ -56,7 +61,8 @@ def forbidden(error):
 
 @app.before_request
 def before_request():
-    """filter each request
+    """
+        filter each request
         before they are handeled
     """
     if auth is None:
@@ -64,8 +70,11 @@ def before_request():
     else:
         # if path requires authentication
         if auth.require_auth(request.path, excluded):
-            # if request doesn't have header key: "Authorization" -> 401
-            if auth.authorization_header(request) is None:
+            # if request doesn't have header key: "Authorization" and
+            # cookie is empty -> 401 abort request
+            header_key = auth.authorization_header(request)
+            cookie = auth.session_cookie(request)
+            if header_key is None and cookie is None:
                 abort(401, description="Unauthorized")
             # If current user returns None -> 403(Forbidden)
             if auth.current_user(request) is None:
