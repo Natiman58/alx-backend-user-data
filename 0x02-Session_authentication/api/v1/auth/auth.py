@@ -3,9 +3,10 @@
     a class to manage the API authentication.
 """
 
-import re
 from typing import List, TypeVar
-from flask import request
+import os
+
+SESSION_NAME = os.getenv("SESSION_NAME")
 
 
 class Auth:
@@ -55,3 +56,13 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """ The current user"""
         return None
+
+    def session_cookie(self, request=None):
+        """
+            returns a cookie from the request
+        """
+        if request is None:
+            return None
+        # the value of the cookie is in _my_session_id variable
+        _my_session_id = request.cookies.get(SESSION_NAME)
+        return _my_session_id
