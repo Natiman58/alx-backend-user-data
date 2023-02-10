@@ -2,10 +2,14 @@
 """
     A module that implements session authentication
 """
+from re import U
 from uuid import uuid4
-
+import flask
+from flask import jsonify, request, make_response
 from models.user import User
 from .auth import Auth
+from api.v1.views import app_views
+from os import getenv
 
 
 class SessionAuth(Auth):
