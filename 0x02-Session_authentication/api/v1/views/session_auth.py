@@ -3,8 +3,9 @@
     session authentication provider
 """
 
-from flask import app_views, jsonify, request, make_response
-from models import User
+from flask import jsonify, request, make_response
+from api.v1.views import app_views
+from models.user import User
 from os import getenv
 SESSION_Name = getenv('SESSION_NAME')
 
