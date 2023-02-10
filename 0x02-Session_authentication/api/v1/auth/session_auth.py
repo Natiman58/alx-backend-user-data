@@ -6,15 +6,14 @@ from re import U
 from uuid import uuid4
 import flask
 from flask import jsonify, request, make_response
+from models import user
 from models.user import User
 from .auth import Auth
-from api.v1.views import app_views
-from os import getenv
 
 
 class SessionAuth(Auth):
     """
-        for session authentication
+        for session authentication class
     """
     user_id_by_session_id = {}
 
@@ -48,3 +47,18 @@ class SessionAuth(Auth):
         user = User.get(user_id)
 
         return user
+
+    def destroy_session(self, request=None):
+        """
+            handles the log out session(deletes user session)
+        """
+        if request is None:
+            return False
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+        user_id = self.user_id_for_session_id(session_id)
+        if user_id is None:
+            return False
+        del self.user_id_by_session_id[session_id]
+        return True

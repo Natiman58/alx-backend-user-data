@@ -6,7 +6,7 @@
 from flask import jsonify, request, make_response
 from api.v1.views import app_views
 from models.user import User
-from os import getenv
+from os import abort, getenv
 SESSION_Name = getenv('SESSION_NAME')
 
 
@@ -17,7 +17,6 @@ def login():
     """
     email = request.form.get('email')
     pwd = request.form.get('password')
-    print(pwd)
 
     if email is None:
         return jsonify({"error": "email missing"}), 400
@@ -34,3 +33,13 @@ def login():
         dict_user = make_response(jsonify(user.to_json()))
         dict_user.set_cookie(SESSION_Name, session_id)
         return dict_user
+
+    @app_views.route('/auth_session/logout',
+                     methods=['DELETE'],
+                     strict_slashes=False)
+    def logout():
+        """logging out and destroy session"""
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)
