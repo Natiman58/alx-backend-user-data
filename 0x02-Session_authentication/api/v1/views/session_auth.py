@@ -34,11 +34,11 @@ def login():
         dict_user.set_cookie(SESSION_Name, session_id)
         return dict_user
 
-    @app_views.route('/auth_session/logout',
+@app_views.route('/auth_session/logout',
                      methods=['DELETE'],
                      strict_slashes=False)
-    def logout():
-        """logging out and destroy session"""
+def logout():
+    """logging out and destroy session"""
     from api.v1.app import auth
     if auth.destroy_session(request):
         return jsonify({}), 200
