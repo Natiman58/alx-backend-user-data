@@ -17,9 +17,11 @@ class SessionExpAuth(SessionAuth):
         """
             initialize the class
         """
-        if SESSION_DURATION is None:
-            self.session_duration = 0
-        self.session_duration = SESSION_DURATION
+        try:
+            session_duration = SESSION_DURATION
+        except Exception:
+            session_duration = 0
+        self.session_duration = session_duration
 
     def create_session(self, user_id=None):
         """
