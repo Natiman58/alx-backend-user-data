@@ -20,8 +20,7 @@ class SessionExpAuth(SessionAuth):
         self.session_duration = SESSION_DURATION
 
     def create_session(self, user_id=None):
-        """
-            create a new session
+        """ using user id
         """
         session_id = super().create_session(user_id)
         if session_id is None:
