@@ -14,7 +14,9 @@ class SessionExpAuth(SessionAuth):
         handles the expiration date of the session
     """
     def __init__(self):
-        """ initialize the class """
+        """
+            initialize the class
+        """
         if SESSION_DURATION is None:
             self.session_duration = 0
         self.session_duration = SESSION_DURATION
