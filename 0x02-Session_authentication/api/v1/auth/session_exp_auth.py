@@ -2,7 +2,6 @@
 """
     setting expiration date to a session ID
 """
-
 from datetime import datetime, timedelta
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
@@ -23,7 +22,8 @@ class SessionExpAuth(SessionAuth):
         self.session_duration = SESSION_DURATION
 
     def create_session(self, user_id=None):
-        """ creates a new session using the user id
+        """
+            creates a new session using the user id
         """
         session_id = super().create_session(user_id)
         if session_id is None:
