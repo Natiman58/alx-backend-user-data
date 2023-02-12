@@ -8,6 +8,7 @@ from os import getenv
 
 SESSION_DURATION = int(getenv('SESSION_DURATION'))
 
+
 class SessionExpAuth(SessionAuth):
     """
         handles the expiration date of the session
@@ -51,5 +52,3 @@ class SessionExpAuth(SessionAuth):
         if allowed_time < datetime.now():
             return None
         return user_info.get("user_id")
-
-
