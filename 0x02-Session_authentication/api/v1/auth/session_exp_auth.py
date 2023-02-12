@@ -3,7 +3,7 @@
     setting expiration date to a session ID
 """
 from datetime import datetime, timedelta
-from api.v1.auth.session_auth import SessionAuth
+from .session_auth import SessionAuth
 from os import getenv
 
 SESSION_DURATION = int(getenv('SESSION_DURATION'))
