@@ -8,6 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # A declarative base class to map a class to DB tables
 Base = declarative_base()
 
+
 class User(Base):
     """
         A User class that represents a db table 'user'
@@ -22,4 +23,3 @@ class User(Base):
     hashed_password = Column(String(250), nullable=False)
     session_id = Column(String(250), nullable=True)
     reset_token = Column(String(250), nullable=True)
-    
