@@ -56,4 +56,3 @@ class DB:
             raise NoResultFound("No user was found with the given filters")
         except InvalidRequestError:
             raise InvalidRequestError("Invalid request")
-
