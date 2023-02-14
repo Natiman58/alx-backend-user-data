@@ -77,7 +77,7 @@ class DB:
                 setattr(user, attr, value)
             else:
                 # Rasie a ValueError
-                raise ValueError(f"Attribute '{attr}' is not in the user model")
+                raise ValueError(f"Attribute '{attr}' not in the user model")
 
-
+        # commit the update to the database
         self._session.commit()
