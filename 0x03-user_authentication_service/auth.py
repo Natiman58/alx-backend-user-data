@@ -4,9 +4,10 @@
 """
 import bcrypt
 
+
 def _hash_password(password: str) -> bytes:
     """
-        hash the password using 
+        hash the password using
     """
     # convert the password str into bytes
     bytes = password.encode('utf-8')
