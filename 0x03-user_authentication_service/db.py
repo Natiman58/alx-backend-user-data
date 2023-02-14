@@ -32,7 +32,10 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Add a user to the the db"""
+        """
+            Add a user to the the db
+            and returns the user object
+        """
         # create a new user object with the given email and pwd
         user = User(email=email, hashed_password=hashed_password)
 
@@ -45,7 +48,7 @@ class DB:
         # return the User object the was added to the DB
         return user
 
-    def find_user_by(self, **kwargs) -> User:
+    '''def find_user_by(self, **kwargs) -> User:
         """
             finds the user and returns the first row found in
             the 'users' table
@@ -56,4 +59,4 @@ class DB:
         except NoResultFound:
             raise NoResultFound("No user was found with the given filters")
         except InvalidRequestError:
-            raise InvalidRequestError("Invalid request")
+            raise InvalidRequestError("Invalid request")'''
