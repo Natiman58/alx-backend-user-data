@@ -71,7 +71,7 @@ class Auth:
         try:
             # locating the user by email
             user = self._db.find_user_by(email=email)
-            # if it exists check if the pwd matches the hashed pwd
+            # if user exists check if the pwd matches the hashed pwd
             # if so; return True
             return bcrypt.checkpw(
                                   password.encode('utf-8'),
