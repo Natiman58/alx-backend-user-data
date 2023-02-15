@@ -75,7 +75,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def _generate_uuid(self) -> Str:
+    def _generate_uuid() -> Str:
         """
             A private method to generate uuid
             and return the string format of the uuid
