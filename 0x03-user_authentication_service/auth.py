@@ -2,6 +2,8 @@
 """
     a script to hash a password
 """
+from ast import Str
+from uuid import uuid4
 import bcrypt
 from db import DB
 from user import User
@@ -72,3 +74,10 @@ class Auth:
         # if no user was found return False
         except NoResultFound:
             return False
+
+    def _generate_uuid(self) -> Str:
+        """
+            A private method to generate uuid
+            and return the string format of the uuid
+        """
+        return str(uuid4())
