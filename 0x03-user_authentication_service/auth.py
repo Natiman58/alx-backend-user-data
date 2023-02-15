@@ -2,11 +2,8 @@
 """
     a script to hash a password
 """
-import re
-from tkinter import N
 from typing import Union
 import uuid
-from app import AUTH
 import bcrypt
 from db import DB
 from user import User
