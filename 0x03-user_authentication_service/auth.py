@@ -4,6 +4,7 @@
 """
 import re
 from tkinter import N
+from typing import Union
 import uuid
 from app import AUTH
 import bcrypt
@@ -104,7 +105,7 @@ class Auth:
         except NoResultFound:
             return None
 
-    def get_user_from_session_id(self, session_id):
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """
             get user from session using the given session_id
         """
