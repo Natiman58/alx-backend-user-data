@@ -59,7 +59,7 @@ def login():
         # store the session id as a cookie on the response
         response.set_cookie('session_id', session_id)
         return response
-    # if not a valid session-> abort(401)
+    # if not a valid session -> abort(401)
     else:
         abort(401)
 

@@ -2,7 +2,10 @@
 """
     a script to hash a password
 """
+import re
+from tkinter import N
 import uuid
+from app import AUTH
 import bcrypt
 from db import DB
 from user import User
@@ -27,7 +30,7 @@ def _generate_uuid() -> str:
     """
         A private method to generate uuid
         and return the string format of the uuid
-        """
+    """
     return str(uuid.uuid4())
 
 
@@ -99,4 +102,20 @@ class Auth:
             return session_id
         # if no user found return None
         except NoResultFound:
+            return None
+
+    def get_user_from_session_id(self, session_id):
+        """
+            get user from session using the given session_id
+        """
+        # get the user from the session by session id
+        user = self._db.find_user_by(session_id=session_id)
+        if session_id is not None and user is not None:
+            try:
+                # return the user
+                return user
+            # if not found, return None
+            except NoResultFound:
+                return None
+        else:
             return None
