@@ -122,5 +122,10 @@ class Auth:
         """
             destroys the session using the given user_id
         """
-        self._db.update_user(user_id=user_id, session_id=None)
-        return None
+        try:
+            # try setting the session id to None
+            self._db.update_user(user_id=user_id, session_id=None)
+            return None
+        # if value error, return None
+        except ValueError:
+            return None
