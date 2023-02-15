@@ -114,8 +114,8 @@ class Auth:
         try:
             # get the user from the session by session id
             user = self._db.find_user_by(session_id=session_id)
-            # return the user
-            return user
         # if not found, return None
         except NoResultFound:
             return None
+        # return the user
+        return user
