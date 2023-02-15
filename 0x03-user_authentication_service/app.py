@@ -82,6 +82,7 @@ def logout():
         response.set_cookie('session_id', '', expires=0)
         # and return the response
         return response
+    # if no user return 403 HTTP status code
     abort(403)
 
 
