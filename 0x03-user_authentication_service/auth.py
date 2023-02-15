@@ -108,7 +108,6 @@ class Auth:
         """
             get user from session using the given session_id
         """
-
         if session_id is None:
             return None
         try:
