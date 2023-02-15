@@ -81,3 +81,22 @@ class Auth:
         # if no user was found return False
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) -> str:
+        """
+            crates session using the given email
+            and returns the session id after updating
+            the user id with the new session id
+        """
+        try:
+            # locate the user by email
+            user = self._db.find_user_by(email=email)
+            # generate a unique session identifier
+            session_id = _generate_uuid()
+            # update user id with the new session id
+            self._db.update_user(user.id, session_id=session_id)
+            # return session_id
+            return session_id
+        # if no user found return None
+        except NoResultFound:
+            return None
