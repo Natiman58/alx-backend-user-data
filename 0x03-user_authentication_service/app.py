@@ -2,7 +2,7 @@
 """
     A simple flask application
 """
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
 
 AUTH = Auth()  # create an instance of Auth class
@@ -62,6 +62,27 @@ def login():
     # if not a valid session -> abort(401)
     else:
         abort(401)
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """
+        handles the logout request
+    """
+    # extract the session id from the request
+    session_id = request.cookies.get('session_id')
+    # get the user using the session id
+    user = AUTH.get_user_from_session_id(session_id)
+    if user:
+        # destroy the user
+        AUTH.destroy_session(user.id)
+        # redirect the response
+        response = make_response(redirect('/'))
+        # set session id cookie expire quickly
+        response.set_cookie('session_id', '', expires=0)
+        # and return the response
+        return response
+    abort(403)
+
 
 
 if __name__ == "__main__":

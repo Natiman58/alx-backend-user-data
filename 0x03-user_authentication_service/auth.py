@@ -121,6 +121,7 @@ class Auth:
     def destroy_session(self, user_id: int) -> None:
         """
             destroys the session using the given user_id
+            return None
         """
         try:
             # try setting the session id to None
