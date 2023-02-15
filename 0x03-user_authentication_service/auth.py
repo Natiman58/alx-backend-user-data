@@ -2,9 +2,6 @@
 """
     a script to hash a password
 """
-from re import U
-from typing import NoReturn
-from urllib.parse import _NetlocResultMixinBase
 import bcrypt
 from db import DB
 from user import User
@@ -52,3 +49,26 @@ class Auth:
 
             # return the new user
             return new_user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """
+            Validate the login credentials for a user.
+            Args:
+            email (str): The email of the user.
+            password (str): The password of the user.
+            Returns:
+            bool: True if the login is successful, False otherwise.
+        """
+        try:
+            # locating the user by email
+            user = self._db.find_user_by(email=email)
+            # if it exists check if the pwd matches the hashed pwd
+            # if so; return True
+            return bcrypt.checkpw(
+                                  password.encode('utf-8'),
+                                  user.hashed_password
+                                  )
+
+        # if no user was found return False
+        except NoResultFound:
+            return False
