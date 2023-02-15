@@ -76,9 +76,9 @@ def logout():
     if user:
         # destroy the user
         AUTH.destroy_session(user.id)
-        # redirect the response
+        # redirect the response to the index page
         response = make_response(redirect('/'))
-        # set session id cookie expire quickly
+        # set session id cookie value to '' and cookie expire quickly
         response.set_cookie('session_id', '', expires=0)
         # and return the response
         return response
