@@ -63,6 +63,7 @@ def login():
     else:
         abort(401)
 
+
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     """
@@ -82,7 +83,6 @@ def logout():
         # and return the response
         return response
     abort(403)
-
 
 
 if __name__ == "__main__":
