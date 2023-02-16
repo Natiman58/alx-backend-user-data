@@ -135,18 +135,14 @@ def update_password():
     new_password = request.form.get('new_password')
 
     try:
-        # if the token is valid
-        if AUTH.valid_login(email, new_password) is True:
-            # update the password
-            AUTH.update_password(reset_token, new_password)
-            # return the json payload
-            return jsonify({
-                            "email": f"{email}",
-                            "message": "Password updated"
-                            })
-        else:
-            abort(403)
-    except Exception:
+        # update the password
+        AUTH.update_password(reset_token, new_password)
+        # return the json payload
+        return jsonify({
+                        "email": f"{email}",
+                        "message": "Password updated"
+                        })
+    except :
         abort(403)
 
 
