@@ -11,25 +11,38 @@ def register_user(email: str, password: str) -> None:
         register the user to the database
         with the given email and password
     """
-    response = requests.post(url+'/users', json_data={"email": email, "password": password})
+    response = requests.post(url+'/users',
+                             json_data={
+                                        "email": email,
+                                        "password": password
+                                        })
     if response.status_code == 200:
         assert response.status_code == 200
     else:
         assert response.status_code == 400
         assert response.json() == {"message": "email already registered"}
 
+
 def log_in_wrong_password(email: str, password: str) -> None:
     """
         test if login with wrong password fails
     """
-    response= requests.post(url+'/sessions', json_data={"email": email, "password": password})
+    response = requests.post(url+'/sessions',
+                             json_data={
+                                       "email": email,
+                                       "password": password
+                                       })
     assert response.status_code == 401
+
 
 def log_in(email: str, password: str) -> str:
     """
         test if login is successful
     """
-    response = requests.post(url+'/sessions', json_data={"email": email, "password": password})
+    response = requests.post(url+'/sessions', json_data={
+                                                         "email": email,
+                                                         "password": password
+                                                         })
     assert response.status_code == 200
     assert response.json() == {"email": email, "password": password}
     return response.cookies.get('session_id')
@@ -47,17 +60,19 @@ def profile_logged(session_id: str) -> None:
     """
         test if the user is logged in
     """
-    response = requests.get(url+'/profile', json_data={"session_id": session_id})
+    response = requests.get(url+'/profile',
+                            json_data={"session_id": session_id})
     assert response.status_code == 200
-
 
 
 def log_out(session_id: str) -> None:
     """
         test if the user is logged out
     """
-    response = requests.delete(url+'/sessions', jason_data={"session_id": session_id})
+    response = requests.delete(url+'/sessions',
+                               jason_data={"session_id": session_id})
     assert response.status_code == 403
+
 
 def reset_password_token(email: str) -> str:
     """
@@ -75,8 +90,6 @@ def update_password(email: str, reset_token: str, new_password: str) -> None:
     """
     response = requests.put(url+'/reset_passord', json_data={"email": email})
     assert response.status_code == 200
-
-
 
 
 EMAIL = "guillaume@holberton.io"
