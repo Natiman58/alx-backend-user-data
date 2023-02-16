@@ -141,7 +141,7 @@ class Auth:
             # if user exists, create a reset token
             reset_token = _generate_uuid()
             # update the user's reset token db column
-            self._db.update_user(user.reset_token, reset_token)
+            self._db.update_user(user.id, reset_token=reset_token)
             # return the token
             return reset_token
         except NoResultFound:
