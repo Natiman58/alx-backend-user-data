@@ -158,9 +158,9 @@ class Auth:
             # create a new hasehed pwd
             new_hashed_password = _hash_password(password)
             # update the hashed password field with the new hashed password
-            self._db.update_user(user.hashed_password, new_hashed_password)
+            self._db.update_user(user.id, hashed_password=new_hashed_password)
             # reset token to none
-            self._db.update_user(user.reset_token, None)
+            self._db.update_user(user.id, reset_token=None)
 
         except NoResultFound:
             raise ValueError
