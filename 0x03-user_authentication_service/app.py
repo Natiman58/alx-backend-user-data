@@ -138,7 +138,7 @@ def update_password():
         # if the token is valid
         if AUTH.valid_login(email, new_password) is True:
             # update the password
-            Auth.update_password(reset_token, new_password)
+            AUTH.update_password(reset_token, new_password)
             # return the json payload
             return jsonify({
                             "email": f"{email}",
