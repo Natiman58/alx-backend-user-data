@@ -144,6 +144,8 @@ def update_password():
                             "email": f"{email}",
                             "message": "Password updated"
                             })
+        else:
+            abort(403)
     except Exception:
         abort(403)
 
