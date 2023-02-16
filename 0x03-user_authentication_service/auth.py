@@ -145,4 +145,4 @@ class Auth:
             # return the token
             return reset_token
         except NoResultFound:
-            raise ValueError(f"No user with email '{email}' exists.")
+            raise ValueError()
