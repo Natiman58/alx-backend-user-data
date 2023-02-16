@@ -115,13 +115,12 @@ def get_reset_password_token():
         # extract the email from the form data
         email = request.form.get('email')
         new_token = AUTH.get_reset_password_token(email)
-        response = jsonify({
+        return jsonify({
                             "email": f"{email}",
                             "reset_token": f"{new_token}"
                             })
-        return response
     # if email is not found; abort(403)
-    except ValueError:
+    except Exception:
         abort(403)
 
 
