@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    a script to hash a password
+    a script to for user authentication
 """
 from typing import Union
 import uuid

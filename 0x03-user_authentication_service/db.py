@@ -45,7 +45,7 @@ class DB:
         # commit the changes to the database
         self._session.commit()
 
-        # return the User object the was added to the DB
+        # return the User object that was added to the DB
         return user
 
     def find_user_by(self, **kwargs) -> User:
