@@ -111,9 +111,9 @@ def get_reset_password_token():
         handles the response for the get_reset_password()
         function and return the json response object
     """
+    # extract the email from the form data
+    email = request.form.get('email')
     try:
-        # extract the email from the form data
-        email = request.form.get('email')
         new_token = AUTH.get_reset_password_token(email)
         return jsonify({
                             "email": f"{email}",
