@@ -155,11 +155,11 @@ class Auth:
         try:
             # extract the user from the db
             user = self._db.find_user_by(reset_token=reset_token)
-            # create a new hasehed pwd
+            # create a new hashed pwd
             new_hashed_password = _hash_password(password)
             # update the hashed password field with the new hashed password
             self._db.update_user(user.id, hashed_password=new_hashed_password)
-            # reset token to none
+            # update the reset_token field to none
             self._db.update_user(user.id, reset_token=None)
 
         except NoResultFound:
