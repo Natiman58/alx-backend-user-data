@@ -63,7 +63,7 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """
-            locates the user by using find_uer_by() and updates
+            locates the user by using find_user_by() and updates
             using the given parameters
         """
         # find the user model using the user id
