@@ -133,7 +133,7 @@ class Auth:
 
     def get_reset_password_token(self, email: str) -> str:
         """
-            generate a new user id and return the token
+            generates a new user id(token) and return the token
         """
         try:
             # find the user
