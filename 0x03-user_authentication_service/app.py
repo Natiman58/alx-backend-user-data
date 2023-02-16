@@ -142,7 +142,7 @@ def update_password():
                         "email": f"{email}",
                         "message": "Password updated"
                         })
-    except :
+    except Exception:
         abort(403)
 
 
